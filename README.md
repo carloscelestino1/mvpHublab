@@ -1,2 +1,0 @@
-# mvpHublab
-project by startups

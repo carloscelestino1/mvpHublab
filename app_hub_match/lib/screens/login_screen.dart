@@ -1,4 +1,9 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
 import 'package:app_hub_match/screens/forgot_passaword_screen.dart';
+import 'package:app_hub_match/screens/selection_profile_screen.dart';
 import 'package:app_hub_match/screens/welcome_screen.dart';
 import 'package:app_hub_match/values/custom_colors.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +17,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _showPassoword = false;
+
+  final _emailcontroller = TextEditingController();
+  final _senhacontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         children: [
                           TextFormField(
+                            controller: _emailcontroller,
                             decoration: const InputDecoration(
                               fillColor: Colors.white54,
                               filled: true,
@@ -110,6 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 10,
                           ),
                           TextFormField(
+                            controller: _senhacontroller,
                             decoration: InputDecoration(
                               fillColor: Colors.white54,
                               filled: true,
@@ -151,7 +161,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             backgroundColor: CustomColors().getColorGreen(),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30))),
-                        onPressed: () {},
+                        onPressed: () {
+                          logar();
+                        },
                         child: const Text(
                           "Entrar",
                           style: TextStyle(
@@ -206,6 +218,53 @@ class _LoginScreenState extends State<LoginScreen> {
           );
         },
       ),
+    );
+  }
+
+  logar() async {
+    var url = Uri.parse(
+        "https://8ca4-179-34-116-254.ngrok-free.app/usuarios/usuarios/");
+    var response = await http.get(url);
+    var data = jsonDecode(response.body);
+    // ignore: avoid_print
+    print(data);
+
+    for (var i in data) {
+      var userEmail = i['email'];
+      var userPassword = i['senha'];
+
+      if (userEmail == _emailcontroller.text &&
+          userPassword == _senhacontroller.text) {
+        // Salvar os dados do usuário ou realizar quaisquer ações necessárias aqui
+
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const SelectionProfilePage()));
+
+        return; // Sair da função após autenticação bem-sucedida
+      }
+    }
+
+    // Caso o loop seja concluído sem encontrar um usuário correspondente
+    // ignore: use_build_context_synchronously
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Erro de autenticação'),
+          content: const Text('Email ou senha incorretos.'),
+          actions: [
+            TextButton(
+              child: const Text('Fechar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

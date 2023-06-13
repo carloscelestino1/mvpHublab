@@ -1,5 +1,3 @@
-import 'package:app_hub_match/screens/edit_profile_screen.dart';
-import 'package:app_hub_match/screens/selection_profile_screen.dart';
 import 'package:app_hub_match/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 

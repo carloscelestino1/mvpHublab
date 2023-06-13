@@ -1,6 +1,7 @@
 import 'package:app_hub_match/screens/welcome_screen.dart';
 import 'package:app_hub_match/values/custom_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -12,6 +13,8 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   bool _showPassoword = false;
   bool _showTerm = false;
+  final _emailcontroller = TextEditingController();
+  final _senhacontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +64,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Column(
                         children: [
                           TextFormField(
+                            controller: _emailcontroller,
                             decoration: const InputDecoration(
                               fillColor: Colors.white,
                               filled: true,
@@ -81,6 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             height: 10,
                           ),
                           TextFormField(
+                            controller: _senhacontroller,
                             decoration: InputDecoration(
                               fillColor: Colors.white,
                               filled: true,
@@ -141,7 +146,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             backgroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30))),
-                        onPressed: () {},
+                        onPressed: () {
+                          cadastrar();
+                        },
                         child: const Text(
                           "Entrar",
                           style: TextStyle(
@@ -160,5 +167,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
         },
       ),
     );
+  }
+
+  cadastrar() async {
+    var url = Uri.parse(
+        "https://8ca4-179-34-116-254.ngrok-free.app/usuarios/usuarios/");
+    // ignore: unused_local_variable
+    var response = await http.post(url, body: {
+      'email': _emailcontroller.text,
+      'senha': _senhacontroller.text,
+    });
   }
 }

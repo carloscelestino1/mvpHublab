@@ -1,3 +1,4 @@
+import 'package:app_hub_match/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import '../values/custom_colors.dart';
 
@@ -182,23 +183,7 @@ class _SelectionProfileState extends State<SelectionProfilePage> {
   void navigateToOtherScreen() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const OtherScreen()),
-    );
-  }
-}
-
-class OtherScreen extends StatelessWidget {
-  const OtherScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Outra Tela'),
-      ),
-      body: const Center(
-        child: Text('Você navegou para outra tela!'),
-      ),
+      MaterialPageRoute(builder: (context) => const ProfileScreenPage()),
     );
   }
 }

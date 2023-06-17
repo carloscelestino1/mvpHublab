@@ -1,11 +1,11 @@
 import 'dart:convert';
 
+import 'package:app_hub_match/screen_manager_app/screen_manager.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:app_hub_match/screens/forgot_passaword_screen.dart';
-import 'package:app_hub_match/screens/selection_profile_screen.dart';
+import 'package:app_hub_match/screens/forgot_password_screen.dart';
 import 'package:app_hub_match/screens/welcome_screen.dart';
-import 'package:app_hub_match/values/custom_colors.dart';
+import 'package:app_hub_match/custom_colors/custom_colors.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors().getWhiteColor(),
+      backgroundColor: CustomColors().getColorWhite(),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return Center(
@@ -62,33 +62,46 @@ class _LoginScreenState extends State<LoginScreen> {
                       "assets/HubMatchLogo.png",
                       height: 250,
                     ),
-                    SizedBox(
-                      height: 50,
-                      child: MaterialButton(
-                        color: CustomColors().getColorGreen(),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(30),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.g_mobiledata,
-                              color: CustomColors().getWhiteColor(),
-                              size: 50,
-                            ),
-                            const Text(
-                              "Entrar com o google",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 22.0,
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              height: 45,
+                              child: MaterialButton(
+                                color: CustomColors().getColorGreen(),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(30),
+                                  ),
+                                ),
+                                onPressed: () {},
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.g_mobiledata,
+                                        color: CustomColors().getColorWhite(),
+                                        size: 50,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      const Text(
+                                        "Entrar com o Google",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20.0,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(
@@ -239,9 +252,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         // ignore: use_build_context_synchronously
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const SelectionProfilePage()));
+            context, MaterialPageRoute(builder: (context) => ScreenManager()));
 
         return; // Sair da função após autenticação bem-sucedida
       }

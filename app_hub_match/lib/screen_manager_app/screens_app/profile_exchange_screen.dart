@@ -1,19 +1,19 @@
 import 'package:app_hub_match/screen_manager_app/screen_manager.dart';
 import 'package:flutter/material.dart';
-import '../custom_colors/custom_colors.dart';
 
-class SelectionProfileScreen extends StatefulWidget {
-  const SelectionProfileScreen({
-    Key? key,
-  }) : super(key: key);
+import '../../custom_colors/custom_colors.dart';
+
+class ProfileExchangeScreen extends StatefulWidget {
+  const ProfileExchangeScreen({Key? key}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
-  _SelectionProfileScreenState createState() => _SelectionProfileScreenState();
+  _ProfileExchangeScreenState createState() => _ProfileExchangeScreenState();
 }
 
-class _SelectionProfileScreenState extends State<SelectionProfileScreen> {
+class _ProfileExchangeScreenState extends State<ProfileExchangeScreen> {
   List<ButtonData> buttons = [];
+  bool isEditing = false;
   String selectedProfile = '';
 
   @override
@@ -30,6 +30,26 @@ class _SelectionProfileScreenState extends State<SelectionProfileScreen> {
                 children: <Widget>[
                   const SizedBox(
                     height: 25,
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          isEditing = !isEditing;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                      ),
+                      child: const Text(
+                        'Editar Perfil',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 25),
                   Row(
@@ -52,7 +72,9 @@ class _SelectionProfileScreenState extends State<SelectionProfileScreen> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  navigateToOtherScreen(context);
+                                  if (!isEditing) {
+                                    navigateToScreenManager();
+                                  }
                                 },
                                 child: Column(
                                   children: [
@@ -72,6 +94,15 @@ class _SelectionProfileScreenState extends State<SelectionProfileScreen> {
                                   ],
                                 ),
                               ),
+                              if (isEditing)
+                                IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () {
+                                    setState(() {
+                                      buttons.remove(buttonData);
+                                    });
+                                  },
+                                ),
                             ],
                           ),
                         )
@@ -152,12 +183,10 @@ class _SelectionProfileScreenState extends State<SelectionProfileScreen> {
     }
   }
 
-  void navigateToOtherScreen(BuildContext context) {
-    Navigator.pushReplacement(
+  void navigateToScreenManager() {
+    Navigator.push(
       context,
-      MaterialPageRoute(
-          // ignore: prefer_const_constructors
-          builder: (context) => ScreenManager()),
+      MaterialPageRoute(builder: (context) => ScreenManager()),
     );
   }
 }

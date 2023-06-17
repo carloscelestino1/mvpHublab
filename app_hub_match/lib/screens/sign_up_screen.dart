@@ -1,5 +1,5 @@
 import 'package:app_hub_match/screens/welcome_screen.dart';
-import 'package:app_hub_match/values/custom_colors.dart';
+import 'package:app_hub_match/custom_colors/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -56,6 +56,51 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Image.asset(
                       "assets/MatchMilhoes.png",
                       height: 250,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              height: 45,
+                              child: MaterialButton(
+                                color: CustomColors().getColorWhite(),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(30),
+                                  ),
+                                ),
+                                onPressed: () {},
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.g_mobiledata,
+                                        color: CustomColors().getColorGreen(),
+                                        size: 50,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      const Text(
+                                        "Cadastrar com o Google",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20.0,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -119,25 +164,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Checkbox(
-                          value: _showTerm,
-                          onChanged: (bool? newValue) {
-                            setState(() {
-                              _showTerm = newValue ?? true;
-                            });
-                          },
-                        ),
-                        const Text(
-                          "Li e concordo com o termos",
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.normal),
-                        )
-                      ],
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Flexible(
+                            child: Row(
+                              children: [
+                                Checkbox(
+                                  value: _showTerm,
+                                  onChanged: (bool? newValue) {
+                                    setState(() {
+                                      _showTerm = newValue ?? true;
+                                    });
+                                  },
+                                ),
+                                const Flexible(
+                                  child: Wrap(
+                                    children: [
+                                      Text(
+                                        "Li e concordo com os termos",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 50,
@@ -150,7 +211,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           cadastrar();
                         },
                         child: const Text(
-                          "Entrar",
+                          "Cadastrar",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,

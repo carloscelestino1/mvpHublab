@@ -1,4 +1,4 @@
-import 'package:app_hub_match/screens/welcome_screen.dart';
+import 'package:app_hub_match/screen_manager_app/screen_manager.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.green),
-      home: const WelcomeScreen(),
+      home: ScreenManager(),
       debugShowCheckedModeBanner: false,
     );
   }

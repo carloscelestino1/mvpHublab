@@ -1,16 +1,11 @@
 import 'package:app_hub_match/screens/login_screen.dart';
 import 'package:flutter/material.dart';
-import '../values/custom_colors.dart';
+import '../custom_colors/custom_colors.dart';
 import 'sign_up_screen.dart';
 
-class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({super.key});
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({Key? key}) : super(key: key);
 
-  @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState();
-}
-
-class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,8 +37,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       padding: EdgeInsets.only(bottom: 10),
                     ),
                     const Text(
-                      textAlign: TextAlign.center,
                       'A nossa platarforma Hub Match te ajuda a encontrar os melhores parceiros que façam sentido para o seu négocio .',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.normal,

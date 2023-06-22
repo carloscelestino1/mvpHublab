@@ -12,6 +12,12 @@ class SelectionProfileScreen extends StatefulWidget {
   _SelectionProfileScreenState createState() => _SelectionProfileScreenState();
 }
 
+class ButtonData {
+  final String selectedProfile;
+
+  ButtonData({required this.selectedProfile});
+}
+
 class _SelectionProfileScreenState extends State<SelectionProfileScreen> {
   List<ButtonData> buttons = [];
   String selectedProfile = '';
@@ -160,10 +166,4 @@ class _SelectionProfileScreenState extends State<SelectionProfileScreen> {
           builder: (context) => ScreenManager()),
     );
   }
-}
-
-class ButtonData {
-  final String selectedProfile;
-
-  ButtonData({required this.selectedProfile});
 }

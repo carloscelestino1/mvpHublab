@@ -251,8 +251,8 @@ class _LoginScreenState extends State<LoginScreen> {
         // Salvar os dados do usuário ou realizar quaisquer ações necessárias aqui
 
         // ignore: use_build_context_synchronously
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ScreenManager()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const ScreenManager()));
 
         return; // Sair da função após autenticação bem-sucedida
       }

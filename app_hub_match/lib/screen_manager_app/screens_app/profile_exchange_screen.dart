@@ -11,6 +11,12 @@ class ProfileExchangeScreen extends StatefulWidget {
   _ProfileExchangeScreenState createState() => _ProfileExchangeScreenState();
 }
 
+class ButtonData {
+  final String selectedProfile;
+
+  ButtonData({required this.selectedProfile});
+}
+
 class _ProfileExchangeScreenState extends State<ProfileExchangeScreen> {
   List<ButtonData> buttons = [];
   bool isEditing = false;
@@ -186,13 +192,7 @@ class _ProfileExchangeScreenState extends State<ProfileExchangeScreen> {
   void navigateToScreenManager() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ScreenManager()),
+      MaterialPageRoute(builder: (context) => const ScreenManager()),
     );
   }
-}
-
-class ButtonData {
-  final String selectedProfile;
-
-  ButtonData({required this.selectedProfile});
 }
